@@ -16,7 +16,7 @@
 Admin::Admin(){
     
 }
-
+void RefundTitle();
 inline void UserNotFound(std::string user) {
     LightHighlight();
     std::cout << Spaces(12)
@@ -216,15 +216,17 @@ void Admin::Refund(string** users, int numUsers) {
     Writer writer;
     Users user;
     float credits;
-
-    while(validRefund == false){
+    
+    RefundTitle();
+    // process of getting rid of loop, for when you come back to it 
+    //while(validRefund == false){
         sellerUsername = "";
         std::cout << "\nPlease enter seller's name: ";
         getline(cin, sellerUsername);
         if (exitCmd(sellerUsername) == true){
             std::cout << "\nExit command executed. Moving you to main menu.";
-            break;
-        }
+            //break;
+        }else{
         for(int i = 0; i < numUsers; i++) if(users[i][0] == sellerUsername){
             userFound = true;
         }
@@ -239,7 +241,7 @@ void Admin::Refund(string** users, int numUsers) {
 
             if (exitCmd(buyerUsername) == true){
                 std::cout << "\nExit command executed. Moving you to main menu.";
-                break;
+                //break;
             }
 
             for(int i = 0; i < numUsers; i++) if(users[i][0] == buyerUsername){
@@ -257,7 +259,7 @@ void Admin::Refund(string** users, int numUsers) {
 
                 if (exitCmd(buffer) == true){
                     std::cout << "\nExit command executed. Moving you to main menu.";
-                    break;
+                    //break;
                 }
                 if(IsDecimalNumber(buffer)){
                     credits = std::stof(buffer);
@@ -266,9 +268,9 @@ void Admin::Refund(string** users, int numUsers) {
                     } else if(credits >= 999.99){ // Max bid
                         std::cout << "You cannot refund more than 999.99";
                     } else {
-                        std::cout << "\nMoney has been refunded, moving you back to main menu";
+                        std::cout << "\nMoney has been refunded, moving you back to Main Menu!";
                         writer.RefundWriteToDailyTransactionFile(buyerUsername, sellerUsername, credits);
-                        break;
+                        //break;
                     }
                 } else {
                     std::cout << "Error: Refund must be numeric and must be between $0.00 and 999.9";
@@ -276,4 +278,10 @@ void Admin::Refund(string** users, int numUsers) {
             }
         }    
     }
+}
+
+void RefundTitle() {
+    Highlight();
+    std::cout << Spaces(24) << "REFUND";
+    Highlight();
 }

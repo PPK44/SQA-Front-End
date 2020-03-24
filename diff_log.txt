@@ -225,3 +225,10 @@ TEST tests/user_buyer_check_auction_items:
 \ No newline at end of file
 
 
+TEST tests/user_full_check_auction_items:
+12c12
+< You have no items in auction.
+---
+> 0. DRAGON SCIMITAR     DRAGON SCIMITAR     PAULKERRIGAN44  100 10.99
+
+

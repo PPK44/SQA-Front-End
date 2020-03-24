@@ -13,8 +13,12 @@
 00 HECKING COOLMAN BS 001000.55
 01 thebest         SS 000000.00
 00 test123         FS 222591.22
-03 tits on dicks       test123             003 000002.00
 02 DRAGON SPEAR        SOMEDUDE         test123 15.00
 02 RUNITE ORE          SOMEDUDE         test123 99
 06 test123         FS 000123.00
 06 test123         FS 000100.00
+04 RUNITE ORE          SOMEDUDE         test123 78.79
+05 test test123 129.99
+04 RUNITE ORE           SOMEDUDE        test123 18
+04 RUNITE ORE           SOMEDUDE        test123 90
+04 RUNITE ORE           SOMEDUDE        test123 290

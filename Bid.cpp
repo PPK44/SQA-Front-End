@@ -32,6 +32,7 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
     bool bidCheck = false;
     bool alphanumericCheck = false;
     bool bidAlphanumericCheck = false;
+    bool done = false;
     int itemSelect = 0;
     int itemLength = 0;
     float minimumPrice = 0.0;
@@ -48,26 +49,31 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
     Highlight();
     std::cout << "Type \"exit\" to return to main menu";
     LightHighlight();
+while(done == false){    
     while (itemMatch == false){
         itemName = "";
         while (itemCheck == false){
             std::cout << "\nEnter an Item name: ";
             getline(cin, itemName);
             if (exitCmd(itemName)){
-                goto loop_end;
+                done = true;
                 break;
-            }
-            //Item name has to be 19 characters or fewer
-            if (itemName.length() > MAX_ITEM_NAME_LENGTH){
-                LightHighlight();
-                std::cout << "Item Name must be 19 characters or fewer";
-                Highlight();
-            }
-            else{
-                itemCheck = true;
+            }else{
+                //Item name has to be 19 characters or fewer
+                if (itemName.length() > MAX_ITEM_NAME_LENGTH){
+                    LightHighlight();
+                    std::cout << "Item Name must be 19 characters or fewer";
+                    Highlight();
+                }
+                else{
+                    itemCheck = true;
+                }
             }
         }
-
+        if(done == true){
+            break;
+        }else{
+       
         //Get the first number of characters based on the length of input of itemName and see if they match
         //So if someone types Ham 
         //Ham, Hammer, Hamster gets sent into bidList and is counted, while han,hanmster,chammer doesn't
@@ -92,7 +98,13 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
         }else{
             itemMatch = true;
         }
+        }
+        
     }
+
+        if(done == false){
+           
+
         // 2D array for the bidlist to contain item name and current bid on it
         bidList = new string*[bidListCount];
         for (int i = 0; i < bidListCount; i++){
@@ -126,7 +138,7 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
                 getline(cin, buffer);
                 
                 if (exitCmd(buffer) == true){
-                    goto loop_end;
+                    done = true;
                     break;
                 }
                 if(IsInteger(buffer)){
@@ -136,88 +148,106 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
                     std::cout << "\nError: Input needs to be numeric: ";
                 }
             }
-            // Need to validate against alphabetic characters first then convert to integer
-            if(itemSelect < bidListCount && itemSelect >= 0){
-                std::cout << "\nYou have selected from List number: " << buffer;
-                itemSelectCheck = true;
-            } 
-            else {
-                LightHighlight();
-                std::cout << "Input needs to be between 0 and " << bidListCount << " and numeric only, please try again";
-                Highlight();
-                alphanumericCheck = false;
+            if(done == true){
+                break;
+            }else{
+                // Need to validate against alphabetic characters first then convert to integer
+                if(itemSelect < bidListCount && itemSelect >= 0){
+                    std::cout << "\nYou have selected from List number: " << buffer;
+                    itemSelectCheck = true;
+                } 
+                else {
+                    LightHighlight();
+                    std::cout << "Input needs to be between 0 and " << bidListCount << " and numeric only, please try again";
+                    Highlight();
+                    alphanumericCheck = false;
+                }
             }
         }
-        minimumPrice = (std::stof(bidList[itemSelect][3]));
-        minimumPrice =  CalculateLowestBid(minimumPrice);
-        LightHighlight();
-        //Display current bid price
-        std::cout << "Current Price: " << bidList[itemSelect][3];
-        std::cout << "\nMinimum Bid Price: " << minimumPrice;
-        std::cout << "\nWould you like to bid on this? (Yes/No): ";
 
-        //Ask user if they would like to bid on it
-        while (initialBidConfirmation == false){
-            buffer = "";
-            getline(cin, buffer);
-            if (exitCmd(buffer) == true){
-                goto loop_end;
-                break;
-            }
-            if (ToLower(buffer).compare(YES) == 0){
-                //Do the bid
-                initialBidConfirmation = true;
-            } else if(ToLower(buffer).compare(NO) == 0){
-                LightHighlight();
-                cout << "Kicking you back to main";
-                Highlight();
-                break;
-            }
-            else{
-                LightHighlight();
-                cout << "Invalid bid input, Please input \"Yes\" or \"No\": ";
-                Highlight();
-            }
-        } 
-        std::cout << "\nHow much would you like to bid (Min Bid: " << minimumPrice << "): ";
-        while (bidCheck == false){
-            buffer = "";
-            if (exitCmd(buffer) == true){
-                goto loop_end;
-                break;
-            }
-            while(bidAlphanumericCheck == false){
+        if(done == false){
+            
+            minimumPrice = (std::stof(bidList[itemSelect][3]));
+            minimumPrice =  CalculateLowestBid(minimumPrice);
+            LightHighlight();
+            //Display current bid price
+            std::cout << "Current Price: " << bidList[itemSelect][3];
+            std::cout << "\nMinimum Bid Price: " << minimumPrice;
+            std::cout << "\nWould you like to bid on this? (Yes/No): ";
+
+            //Ask user if they would like to bid on it
+            while (initialBidConfirmation == false){
+                buffer = "";
                 getline(cin, buffer);
-                if(IsDecimalNumber(buffer)){
-                    theBid = stof(buffer);
-                    bidAlphanumericCheck = true;
-                } else{
+                if (exitCmd(buffer) == true){
+                    done = true;
+                    break;
+                }
+                if (ToLower(buffer).compare(YES) == 0){
+                    //Do the bid
+                    initialBidConfirmation = true;
+                } else if(ToLower(buffer).compare(NO) == 0){
                     LightHighlight();
-                    std::cout << "Input must be numeric";
+                    cout << "Kicking you back to main";
+                    Highlight();
+                    break;
+                }
+                else{
+                    LightHighlight();
+                    cout << "Invalid bid input, Please input \"Yes\" or \"No\": ";
                     Highlight();
                 }
-            }   
-            if (theBid < minimumPrice){
-                LightHighlight();
-                std::cout << "New bid must be 5% higher than current price";
-                Highlight();
-                bidAlphanumericCheck = false;
-            } else if(theBid > MAX_BID){
-                LightHighlight();
-                std::cout << "The maximum bid you can bid is $" << MAX_BID;
-                Highlight();
-                bidAlphanumericCheck = false;
-            } else {
-                Writer writer;
-                //Item Name, Seller's name, buyer's name, new bid all in string
-                LightHighlight();
-                std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
-                Highlight();
-                writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), buffer);
-                bidCheck = true;
+            }
+            if (done == false){
+                
+                std::cout << "\nHow much would you like to bid (Min Bid: " << minimumPrice << "): ";
+                while (bidCheck == false){
+                    buffer = "";
+                    getline(cin, buffer);
+                    if (exitCmd(buffer) == true){
+                        
+                        done = true;
+                        break;
+                    }
+                    
+                    while(bidAlphanumericCheck == false){
+                        
+                        if(IsDecimalNumber(buffer)){
+                            theBid = stof(buffer);
+                            bidAlphanumericCheck = true;
+                        } else{
+                            LightHighlight();
+                            std::cout << "Input must be numeric";
+                            Highlight();
+                        }
+                    }   
+                    if (theBid < minimumPrice){
+                        LightHighlight();
+                        std::cout << "New bid must be 5% higher than current price";
+                        Highlight();
+                        bidAlphanumericCheck = false;
+                    } else if(theBid > MAX_BID){
+                        LightHighlight();
+                        std::cout << "The maximum bid you can bid is $" << MAX_BID;
+                        Highlight();
+                        bidAlphanumericCheck = false;
+                    } else {
+                        Writer writer;
+                        //Item Name, Seller's name, buyer's name, new bid all in string
+                        LightHighlight();
+                        std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
+                        Highlight();
+                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), buffer);
+                        bidCheck = true;
+                        goto loop_end;
+                    }
+                    
+                }
             }
         }
-    loop_end: // used to break multi level loops cause of the way i set my code up
+    }
+}
+   loop_end:
     cout << "Exit command executed. Moving you back to main menu";
 }
 

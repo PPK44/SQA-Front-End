@@ -267,6 +267,8 @@ void Menu(Users user){
                 admin.DeleteUser(accounts, userCount);
 
 			}else if(ToLower(choice).compare("refund") == 0) {
+
+				admin.Refund(accounts, userCount);
 				
 			}else if(ToLower(choice).compare("update") == 0) {
                 
@@ -383,12 +385,13 @@ void readInitialFiles(string curr, string avail){
 			items[j][1] = temp.substr(5, 19); // Item Name
 			items[j][2] = temp.substr(24, 16); // Seller name
 			items[j][3] = temp.substr(40, 15);  // Current Bidder's name
-			items[j][4] = temp.substr(55, 3); // Remaining days
-			items[j][5] = temp.substr(59, 8); // Current bid
+			items[j][4] = temp.substr(55, 4); // Remaining days
+			items[j][5] = temp.substr(59, 7); // Current bid
+		
+		//cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + items[j][5] + "\n";
 			j++;
-
 	}
-	//cout << items[0][0] + items[0][1] + items[0][2] + items[0][3] + items[0][4] + items[0][5] + "\n";
+	
 
 	File.close(); //closing the file
 }

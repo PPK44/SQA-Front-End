@@ -53,6 +53,8 @@ void Writer::WriteToAvailableItemsFile(string id, string item, string seller, st
 void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, string buyerName, string bid){
 
     string buffer;
+    //std::stringstream stream;
+    //stream << std::fixed << std::setprecision(2) << fixed << user.getCredits();
     outFile.open(DAILY_TRANSACTION_FILE, ios::app);
     outFile << "\n04 " + itemName + " " + sellerName + " " + buyerName + " " + bid; 
 
@@ -166,8 +168,12 @@ void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int n
 
 void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerName, float refundAmount){
     string buffer;
+
     
-    buffer = std::to_string(refundAmount);
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << fixed << refundAmount;
+    
+    buffer = stream.str();
     outFile.open(DAILY_TRANSACTION_FILE, ios::app);
     outFile << "\n05 " + buyerName + " " +  sellerName + " " + buffer; 
 

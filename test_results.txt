@@ -47,5 +47,5 @@ TEST tests/user_create_invalid_space_password: PASS
 TEST tests/user_create_invalid_user_type: PASS
 TEST tests/user_create_invalid_username: PASS
 TEST tests/user_create_valid_user: PASS
-TEST tests/user_full_check_auction_items: PASS
+TEST tests/user_full_check_auction_items: FAIL
 TEST tests/user_seller_check_auction_items: PASS

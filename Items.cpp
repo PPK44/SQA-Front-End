@@ -18,7 +18,6 @@ bool itemMatch = false;
 bool itemCheck = false;
 int itemLength = 0;
 string itemNameListCut = "";
-const string EXIT = "exit";
 int j = 0;
 string usernameplusspaces = "";
 
