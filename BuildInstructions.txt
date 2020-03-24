@@ -1,0 +1,5 @@
+Build Instrctions:
+
+1. Run the Makefile 
+2. If on windows type auction-system current_user_accounts_file.txt available_items_file.txt daily_transaction_file.txt into cmd
+3. If on linux type ./auction-system.exe current_user_accounts_file.txt available_items_file.txt daily_transaction_file.txt

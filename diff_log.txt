@@ -1,0 +1,227 @@
+TEST tests/admin_refund_invalid_confirmation:
+0a1,15
+> =========================================================
+>                         DELETE
+> =========================================================
+> 
+> Enter Transaction ID to refund: ABC123
+> 
+> Are you sure you want to refund this
+> transaction? (Yes/No): KAI
+> 
+> ---------------------------------------------------------
+>                     Invalid Confirmation.
+> =========================================================
+> 
+> 
+> 
+2,17d16
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome ADMINBOY! Glad to see you are back :)
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+19,20d17
+< Please Type login, create or exit!
+< Enter Command: 
+
+
+TEST tests/admin_refund_invalid_id:
+0a1,13
+> =========================================================
+>                         DELETE
+> =========================================================
+> 
+> Enter Transaction ID to refund: qqqqqqq
+> 
+> ---------------------------------------------------------
+>                  Invalid Transaction ID.  
+>               Transaction ID does not exist
+> =========================================================
+> 
+> 
+> 
+2,17d14
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome ADMINBOY! Glad to see you are back :)
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+19,20d15
+< Please Type login, create or exit!
+< Enter Command: 
+
+
+TEST tests/admin_refund_valid_decline:
+0a1,15
+> =========================================================
+>                         DELETE
+> =========================================================
+> 
+> Enter Transaction ID to refund: ABC123
+> 
+> Are you sure you want to refund this
+> transaction? (Yes/No): NO
+> 
+> ---------------------------------------------------------
+>                 Refund attempt aborted.
+> =========================================================
+> 
+> 
+> 
+2,17d16
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome ADMINBOY! Glad to see you are back :)
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+19,20d17
+< Please Type login, create or exit!
+< Enter Command: 
+
+
+TEST tests/admin_refund_valid_refund:
+0a1,15
+> =========================================================
+>                         DELETE
+> =========================================================
+> 
+> Enter Transaction ID to refund: ABC123
+> 
+> Are you sure you want to refund this
+> transaction? (Yes/No): YES
+> 
+> ---------------------------------------------------------
+>           Transaction ABC123 has been refunded.
+> =========================================================
+> 
+> 
+> 
+2,17d16
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome ADMINBOY! Glad to see you are back :)
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< AA Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+19,20d17
+< Please Type login, create or exit!
+< Enter Command: 
+
+
+TEST tests/credit_user_invalid_over_session:
+1,30c1,6
+< 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome MR.RUNESCAPEMAN! Glad to see you are back :)
+< FS Enter Command: 
+< How much Credit do you want to add to your account: 
+< ---------------------------------------------------------
+< You have added: 800
+< =========================================================
+< 
+< FS Enter Command: 
+< How much Credit do you want to add to your account: 
+< ---------------------------------------------------------
+< You have added: 300
+< =========================================================
+< 
+< FS Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< 
+---
+> Input credit amount: 300.00
+> --------------------------------------------
+> You have already received $800.00.
+> The maximum amount a user can receive per
+> session is $1000.00.
+> ============================================
+\ No newline at end of file
+
+
+TEST tests/user_buyer_check_auction_items:
+0a1,3
+> =========================================================
+>             BALLER SQUAD'S AUCTION EMPORIUM!
+> =========================================================
+2,18c5
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+< Username: 
+< Password: 
+< Welcome BUYINGMAN! Glad to see you are back :)
+< BS Enter Command: 
+< BS Enter Command: 
+< ==========================================
+<       SQA Baller Squad Auction House
+< ==========================================
+< 
+< Please Type login, create or exit!
+< Enter Command: 
+---
+>         Buy accounts cannot check auctioned items.
+19a7,8
+> ---------------------------------------------------------
+> =========================================================
+\ No newline at end of file
+
+
