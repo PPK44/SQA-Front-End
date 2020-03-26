@@ -48,6 +48,10 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
     TransactionTitle(title);
     std::cout << "Type \"exit\" to return to main menu";
     LightHighlight();
+    /**
+     * get rid of all while loops and when an error is thrown you go back to main, meaning no use for goto 
+     * and a lot of the if statements managing breaks
+     */ 
 while(done == false){    
     while (itemMatch == false){
         itemName = "";
@@ -236,7 +240,7 @@ while(done == false){
                         LightHighlight();
                         std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
                         Highlight();
-                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), buffer);
+                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), theBid);
                         bidCheck = true;
                         goto loop_end;
                     }
@@ -246,8 +250,9 @@ while(done == false){
         }
     }
 }
-   loop_end:
+   
     cout << "Exit command executed. Moving you back to main menu";
+    loop_end:;
 }
 
 bool Bid::exitCmd(string buffer){

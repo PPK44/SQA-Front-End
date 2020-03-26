@@ -57,15 +57,11 @@ class Writer{
         /**
          * Writer Class method to write to the daily transaction file    
          */
-        void BidWriteToDailyTransactionFile(string, string, string, string);
+        void BidWriteToDailyTransactionFile(string, string, string, float);
         /**
          * Writer class method to write to the user accounts file   
          */
         void WriteToChangePassword(Users, string);
-        /**
-         * Writer class method to write to the available items file    
-         */
-        void WriteToAvailableItemsFile(string, string, string, string, string, string);
         /**
          * Writer class method to write to the user accounts file   
          */

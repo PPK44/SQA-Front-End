@@ -18,45 +18,18 @@ Writer::Writer(){
 
 }
 
-void Writer::WriteToAvailableItemsFile(string id, string item, string seller, string bidder, string days, string bid){
 
-    string itemId;
-    string itemName;
-    string sellerName;
-    string bidderName;
-    string remainingDays;
-    string currentBid;
-
-    itemId = id;
-    itemId.append(4 - id.length(), ' ');
-    itemName = item;
-    itemName.append(15 - item.length(), ' ');
-    sellerName = seller;
-    sellerName.append(12 - seller.length(), ' ');
-    bidderName = bidder;
-    bidderName.append(12 - bidder.length(), ' ');
-    remainingDays = days;
-    remainingDays.insert(remainingDays.begin(), 3 - days.length(), ' ');
-    currentBid = bid;
-    currentBid.insert(remainingDays.begin(), 9 - days.length(), '0');
-
-    outFile.open(AVAILABLE_ITEMS_FILE, ios::app);
-
-        outFile << "\n" + itemId + " " << itemName + " " << sellerName + " " << bidderName + " " << remainingDays + " " << currentBid;
-
-    outFile.close();
-   
-
-}
-
-
-void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, string buyerName, string bid){
+void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, string buyerName, float bid){
 
     string buffer;
-    //std::stringstream stream;
-    //stream << std::fixed << std::setprecision(2) << fixed << user.getCredits();
+    std::stringstream stream;
+    stream << std::fixed << std::setprecision(2) << fixed << bid;
+    string currentBid = stream.str();
+    currentBid.insert(currentBid.begin(), 7 - currentBid.length(), '0');
+    string name = buyerName;
+    name.append(15 - buyerName.length(), ' ');
     outFile.open(DAILY_TRANSACTION_FILE, ios::app);
-    outFile << "\n04 " + itemName + " " + sellerName + " " + buyerName + " " + bid; 
+    outFile << "\n04 " + itemName + " " + sellerName + " " + name + " " + currentBid; 
 
     outFile.close();
 

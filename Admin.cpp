@@ -16,6 +16,7 @@
 Admin::Admin(){
     
 }
+void EnableDuplicate(string, Users);
 inline void UserNotFound(std::string user) {
     LightHighlight();
     std::cout << Spaces(12)
@@ -108,10 +109,11 @@ void Admin::Update(string** users, int numUsers){
 }
 
 void Admin::EnableUser(string** users, int numUsers){
-    const string code = "07";
+    
     string buffer = "";
+    string userType = "";
     Users user;
-    Writer writer;
+    
     bool userFound, confirm = false;
     std::cout << endl
               << "Which user would you like to enable?: ";
@@ -136,24 +138,24 @@ void Admin::EnableUser(string** users, int numUsers){
                       << "'s account is already enabled.";
             Highlight();
         } else {
-            std::cout << endl
-                  << "Do you want to enable this user? (Yes/No): ";
-            getline(cin, buffer);
-            if(ToLower(buffer).compare(YES) == 0) {
-                LightHighlight();
-                std::cout << user.getUserName() << "'s account has been enabled!";
-                Highlight();
-                // Enable the man
-                writer.GenericWriteToDailyTransactionFile(user, code);
-            } else if(ToLower(buffer).compare(NO) == 0) {
-                LightHighlight();
-                std::cout << user.getUserName() << "'s account was not enabled!";
-                Highlight();
-            } else {
-                LightHighlight();
-                std::cout << "Invalid option.  Please type \"yes\" or \"no\".";
-                Highlight();
-            }
+            cout << "\nWhat user type will this user be: " + FULL_STANDARD + " "  + BUY_STANDARD + " " + SELL_STANDARD + "?"<< endl;
+                cout << "User Type: ";
+                getline(cin, userType);
+                cout << userType << endl;
+                if(ToLower(userType).compare(ToLower(FULL_STANDARD)) == 0){
+                    user.setUserType(FULL_STANDARD);
+                    EnableDuplicate(buffer, user);
+                }else if(ToLower(userType).compare(ToLower(BUY_STANDARD)) == 0){
+                    user.setUserType(BUY_STANDARD);
+                    EnableDuplicate(buffer, user);
+                }else if(ToLower(userType).compare(ToLower(SELL_STANDARD)) == 0){
+                    user.setUserType(SELL_STANDARD);
+                    EnableDuplicate(buffer, user);
+                }else{
+                    cout << "Invalid Option, Please try enabling this user again!" << endl;
+                } 
+            
+            
         }
         
     }
@@ -288,3 +290,27 @@ void Admin::Refund(string** users, int numUsers) {
     }
 }
 
+void EnableDuplicate(string buffer, Users user){
+    Writer writer;
+    const string code = "07";
+    cout << endl
+         << "Are you sure you want to enable this user? (Yes/No): ";
+    getline(cin, buffer);
+
+    if(ToLower(buffer).compare(YES) == 0) {
+        
+        LightHighlight();
+        std::cout << user.getUserName() << "'s account has been enabled with " + user.getUserType() + " access!";
+        Highlight();
+        // Enable the man
+        writer.GenericWriteToDailyTransactionFile(user, code);
+    } else if(ToLower(buffer).compare(NO) == 0) {
+        LightHighlight();
+        std::cout << user.getUserName() << "'s account was not enabled!";
+        Highlight();
+    } else {
+        LightHighlight();
+        std::cout << "Invalid option.  Please type \"yes\" or \"no\".";
+        Highlight();
+    }
+}
