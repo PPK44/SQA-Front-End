@@ -29,8 +29,9 @@ void Items::CheckItems(string** items, int itemCount, Users user){
     //Item stores the username + spaces for a total of 16 characters
     //So we need to add spaces at the end of user's username until it's 16 characters long to compare properly
     usernameplusspaces = user.getUserName();
+    
 
-    for (int i = user.getUserName().length(); i < 16; i++){
+    for (int i = user.getUserName().length(); i < 15; i++){
         usernameplusspaces += " ";
     }
     
@@ -38,6 +39,7 @@ void Items::CheckItems(string** items, int itemCount, Users user){
         //Compares username but right now item stores the username + spaces
         //Either trim the spaces at the end or add spaces at the end of user input until it's 15 characters long
         if(usernameplusspaces.compare(items[i][2]) == 0){
+            cout << items[i][2] << endl;
             bidListCount++;
         }
     }

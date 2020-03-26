@@ -5,14 +5,24 @@
 
 Please Type login, create or exit!
 Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
 Username: 
 Password: 
 Welcome HECKINGCOOLMAN! Glad to see you are back :)
-BS Enter Command: 
+Your user Type is BS.
+
+Enter Command: 
+=========================================================
+                        CHANGE PASSWORD
+=========================================================
+
 Enter new password: 
 Confirm password: 
 Your password cannot contain spaces
-BS Enter Command: 
+Enter Command: 
 ==========================================
       SQA Baller Squad Auction House
 ==========================================

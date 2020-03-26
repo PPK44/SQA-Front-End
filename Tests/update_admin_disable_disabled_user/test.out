@@ -5,17 +5,27 @@
 
 Please Type login, create or exit!
 Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
 Username: 
 Password: 
 Welcome ADMINBOY! Glad to see you are back :)
-AA Enter Command: Would you like to enable or disable a user?: 
+Your user Type is AA.
+
+Enter Command: 
+=========================================================
+                        UPDATE
+=========================================================
+Would you like to enable or disable a user?: 
 Which user would you like to disable?: 
 Do you want to disable this user? (Yes/No): 
 ---------------------------------------------------------
 DONOTHURTME's account has been disabled!
 =========================================================
 
-AA Enter Command: 
+Enter Command: 
 ==========================================
       SQA Baller Squad Auction House
 ==========================================

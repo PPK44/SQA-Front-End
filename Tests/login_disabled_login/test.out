@@ -5,6 +5,10 @@
 
 Please Type login, create or exit!
 Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
 Username: 
 Password: 
 User is disabled
@@ -14,7 +18,8 @@ User is disabled
 
 Please Type login, create or exit!
 Enter Command: 
-User is disabled
+You must login before you can access our system
+
 ==========================================
       SQA Baller Squad Auction House
 ==========================================

@@ -1,18 +1,33 @@
+
+==========================================
+      SQA Baller Squad Auction House
+==========================================
+
+Please Type login, create or exit!
+Enter Command: 
 =========================================================
-                        DELETE
-=========================================================
-
-Enter Transaction ID to refund: ABC123
-
-Are you sure you want to refund this
-transaction? (Yes/No): KAI
-
----------------------------------------------------------
-                    Invalid Confirmation.
+                        LOGIN
 =========================================================
 
+Username: 
+Password: 
+Welcome ADMINBOY! Glad to see you are back :)
+Your user Type is AA.
 
+Enter Command: 
+=========================================================
+                        REFUND
+=========================================================
 
+Please enter seller's name: 
+Please enter buyer's name: 
+Please enter credit amount to refund: 
+Money has been refunded, moving you back to Main Menu!
+Enter Command: 
+==========================================
+      SQA Baller Squad Auction House
+==========================================
 
-
+Please Type login, create or exit!
+Enter Command: 
 

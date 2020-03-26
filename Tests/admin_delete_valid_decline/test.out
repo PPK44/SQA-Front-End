@@ -5,10 +5,20 @@
 
 Please Type login, create or exit!
 Enter Command: 
+=========================================================
+                        LOGIN
+=========================================================
+
 Username: 
 Password: 
 Welcome ADMINBOY! Glad to see you are back :)
-AA Enter Command: 
+Your user Type is AA.
+
+Enter Command: 
+=========================================================
+                        DELETE
+=========================================================
+
 Enter username: 
 Are you sure you want to delete user test123?
 (Yes/No): 
@@ -17,7 +27,7 @@ Are you sure you want to delete user test123?
             test123 was not deleted.
 =========================================================
 
-AA Enter Command: 
+Enter Command: 
 ==========================================
       SQA Baller Squad Auction House
 ==========================================

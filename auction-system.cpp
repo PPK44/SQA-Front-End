@@ -389,7 +389,7 @@ void readInitialFiles(string curr, string avail){
 		getline(File, temp);
 			items[j][0] = temp.substr(0, 4); // Item ID
 			items[j][1] = temp.substr(5, 19); // Item Name
-			items[j][2] = temp.substr(24, 16); // Seller name
+			items[j][2] = temp.substr(25, 15); // Seller name
 			items[j][3] = temp.substr(40, 15);  // Current Bidder's name
 			items[j][4] = temp.substr(55, 4); // Remaining days
 			items[j][5] = temp.substr(59, 7); // Current bid
