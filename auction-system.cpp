@@ -27,11 +27,11 @@ using namespace std;
 
 void Home(Users);
 void readInitialFiles(string, string);
-void Menu(Users);
+string Menu(Users);
 void Title();
 void PressEnterToExit();
 void ClearScreen();
-string error = "";
+
 string currentAccounts = "";
 string availableItems = "";
 string trans = "";
@@ -85,10 +85,13 @@ void Home(Users user){
 	bool login;
 	bool ifExit = true;
 	
+	
 	while(ifExit == true){
 		
+		string error = "";
+		string returnString = "";
 		//ClearScreen();
-		cout << error;
+		
 		Title();
 		cout << "\nPlease Type login, create or exit!";
 		cout << "\nEnter Command: ";
@@ -104,7 +107,7 @@ void Home(Users user){
 				 }else if(user.getUserType().compare(DISABLED_CODE) == 0){
 					 	error = "\nUser is disabled";
 				 }else{
-					Menu(user);
+					returnString = Menu(user);
 				 }
 				 
 				 //ClearScreen();
@@ -126,11 +129,11 @@ void Home(Users user){
 			error = "\nSlashes and Spaces are not Allowed!\n";
 			
 		}else{
-			if(error.empty()){
+			if(returnString.empty()){
 				error = "\nYou must login before you can access our system\n";
 			}
 		}
-		
+		cout << error;
 		
 	}	
 	
@@ -140,7 +143,7 @@ void Home(Users user){
  * Function for after the user has logged in showing the menu screen 
  * This is where the user will enter in transactions and navigate the application
  */ 
-void Menu(Users user){
+string Menu(Users user){
 	Admin admin;
 	Advertise ad;
 	Items newItem;
@@ -159,11 +162,12 @@ void Menu(Users user){
 	std::cin.ignore( std::numeric_limits <std::streamsize> ::max(), '\n' );
 	//Title();
 	cout << "\nWelcome " + user.getUserName() + "! Glad to see you are back :)";
+	cout << "\nYour user Type is " + user.getUserType() + "." << endl;
 	while(ifLogout == true){
 
 		if(user.getUserType().compare(FULL_STANDARD) == 0) {
-
-			cout << "\nFS Enter Command: ";
+			
+			cout << "\nEnter Command: ";
 			getline(cin, choice);
 			if(ToLower(choice).compare(ADVERTISE) == 0) {
                 
@@ -201,7 +205,7 @@ void Menu(Users user){
 			} 
 
 		}else if(user.getUserType().compare(BUY_STANDARD) == 0) {
-			cout << "\nBS Enter Command: ";
+			cout << "\nEnter Command: ";
 			getline(cin, choice);
 			if(ToLower(choice).compare("bid") == 0){
 				
@@ -228,7 +232,7 @@ void Menu(Users user){
 				Highlight();
 			} 
 		}else if(user.getUserType().compare(SELL_STANDARD) == 0) {
-			cout << "\nSS Enter Command: ";
+			cout << "\nEnter Command: ";
 			getline(cin, choice);
             if(ToLower(choice).compare("advertise") == 0) {
 
@@ -254,7 +258,7 @@ void Menu(Users user){
 				newItem.CheckItems(items, itemCount, user);
 			} 
 		}else if(user.getUserType().compare(ADMIN) == 0) {
-			cout << "\nAA Enter Command: ";
+			cout << "\nEnter Command: ";
 			getline(cin, choice);
 			if(ToLower(choice).compare("bid") == 0) {
 				
@@ -290,6 +294,8 @@ void Menu(Users user){
 		
 
 	} 
+
+	return "return";
 
 }
 

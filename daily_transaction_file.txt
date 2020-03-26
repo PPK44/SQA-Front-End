@@ -22,3 +22,15 @@
 04 RUNITE ORE           SOMEDUDE        test123 18
 04 RUNITE ORE           SOMEDUDE        test123 90
 04 RUNITE ORE           SOMEDUDE        test123 290
+00 test123         FS 222591.22
+05 test test123 129.00
+00 ADMINBOY        AA 999999.00
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22
+00 test123         FS 222591.22

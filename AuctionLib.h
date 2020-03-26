@@ -39,5 +39,6 @@ bool exitCmd(std::string buffer);
 
 void Highlight();
 void LightHighlight();
+void TransactionTitle(string transaction);
 
 #endif

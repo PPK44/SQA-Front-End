@@ -13,7 +13,6 @@
 #include <string>
 
 Advertise::Advertise(){}
-void AdTitle();
 
 void Advertise::AdvertiseItem(Users self){
     Writer writer;
@@ -24,8 +23,9 @@ void Advertise::AdvertiseItem(Users self){
     float minBid = 0.0f;
     int numDays = 0;
     bool validAd = false;
+    string title = "ADVERTISE";
 
-    AdTitle();
+    TransactionTitle(title);
    // while(validAd == false)
     //{
         std::cout << "\nItem name: ";
@@ -107,8 +107,4 @@ void Advertise::AdvertiseItem(Users self){
     
 }
 
-void AdTitle() {
-    Highlight();
-    std::cout << Spaces(24) << "ADVERTISE";
-    Highlight();
-}
+

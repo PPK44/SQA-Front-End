@@ -16,7 +16,6 @@
 Admin::Admin(){
     
 }
-void RefundTitle();
 inline void UserNotFound(std::string user) {
     LightHighlight();
     std::cout << Spaces(12)
@@ -36,6 +35,9 @@ void Admin::DeleteUser(std::string** users, int numUsers){
     string userType;
     string credits;
     const string code = "02";
+    string title = "DELETE";
+
+		TransactionTitle(title);
 
     std::cout << "\nEnter username: ";
     getline(cin, username);
@@ -91,6 +93,9 @@ void Admin::DeleteUser(std::string** users, int numUsers){
 
 void Admin::Update(string** users, int numUsers){
     string buffer = "";
+    string title = "UPDATE";
+
+		TransactionTitle(title);
     std::cout << "Would you like to enable or disable a user?: ";
     getline(cin, buffer);
     if(ToLower(buffer).compare(DISABLE) == 0) DisableUser(users, numUsers);
@@ -216,8 +221,9 @@ void Admin::Refund(string** users, int numUsers) {
     Writer writer;
     Users user;
     float credits;
+    string title = "REFUND";
     
-    RefundTitle();
+    TransactionTitle(title);
     // process of getting rid of loop, for when you come back to it 
     //while(validRefund == false){
         sellerUsername = "";
@@ -242,46 +248,43 @@ void Admin::Refund(string** users, int numUsers) {
             if (exitCmd(buyerUsername) == true){
                 std::cout << "\nExit command executed. Moving you to main menu.";
                 //break;
-            }
-
-            for(int i = 0; i < numUsers; i++) if(users[i][0] == buyerUsername){
-                userFound = true;
-            }
-            userFound = MatchUser(users, numUsers, buyerUsername);
-
-            if(userFound == false){
-                UserNotFound(buyerUsername);
-            } else if(sellerUsername == buyerUsername) {
-                std::cout << "\nError: Buyer and Seller names cannot be the same.";
             }else{
-                cout << "\nPlease enter credit amount to refund: ";
-                getline(cin,buffer);
 
-                if (exitCmd(buffer) == true){
-                    std::cout << "\nExit command executed. Moving you to main menu.";
-                    //break;
+                for(int i = 0; i < numUsers; i++) if(users[i][0] == buyerUsername){
+                    userFound = true;
                 }
-                if(IsDecimalNumber(buffer)){
-                    credits = std::stof(buffer);
-                    if(credits <= 0.0){
-                        std::cout << "You cannot refund less than 0 credits";
-                    } else if(credits >= 999.99){ // Max bid
-                        std::cout << "You cannot refund more than 999.99";
-                    } else {
-                        std::cout << "\nMoney has been refunded, moving you back to Main Menu!";
-                        writer.RefundWriteToDailyTransactionFile(buyerUsername, sellerUsername, credits);
+                userFound = MatchUser(users, numUsers, buyerUsername);
+
+                if(userFound == false){
+                    UserNotFound(buyerUsername);
+                } else if(sellerUsername == buyerUsername) {
+                    std::cout << "\nError: Buyer and Seller names cannot be the same.";
+                }else{
+                    cout << "\nPlease enter credit amount to refund: ";
+                    getline(cin,buffer);
+
+                    if (exitCmd(buffer) == true){
+                        std::cout << "\nExit command executed. Moving you to main menu.";
                         //break;
+                    }else{
+                        if(IsDecimalNumber(buffer)){
+                            credits = std::stof(buffer);
+                            if(credits <= 0.0){
+                                std::cout << "You cannot refund less than 0 credits";
+                            } else if(credits >= 999.99){ // Max bid
+                                std::cout << "You cannot refund more than 999.99";
+                            } else {
+                                std::cout << "\nMoney has been refunded, moving you back to Main Menu!";
+                                writer.RefundWriteToDailyTransactionFile(buyerUsername, sellerUsername, credits);
+                                //break;
+                            }
+                        } else {
+                            std::cout << "Error: Refund must be numeric and must be between $0.00 and 999.9";
+                        }
                     }
-                } else {
-                    std::cout << "Error: Refund must be numeric and must be between $0.00 and 999.9";
                 }
             }
         }    
     }
 }
 
-void RefundTitle() {
-    Highlight();
-    std::cout << Spaces(24) << "REFUND";
-    Highlight();
-}

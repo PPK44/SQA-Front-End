@@ -20,6 +20,9 @@ bool Users::Login(string** users, int userCount){
 	string username = "";
 	string password = "";
 	bool validation = false;
+	string title = "LOGIN";
+
+		TransactionTitle(title);	
 		
      	cout << "\nUsername: ";
      	cin >> username;
@@ -50,6 +53,9 @@ void Users::ChangePassword(Users user, string file){
 	string password;
 	string password2;
 	Writer writer;
+	string title = "CHANGE PASSWORD";
+
+		TransactionTitle(title);
 	
 	std::cout << "\nEnter new password: ";
     getline(cin, password);
@@ -86,7 +92,9 @@ void Users::Create(string** users, int userCount){
 	const string SELL_STANDARD = "SS";
 	const string FULL_STANDARD = "FS";
 	const string code = "01";
-	
+	string title = "CREATE";
+
+		TransactionTitle(title);
 ///while(validation == false){
 	cout << "\nEnter Username: ";
 	getline(cin, username);
@@ -155,6 +163,9 @@ void Users::AddCredits(Users user){
 	const string code = "06";
 	float minCredit = 0.0f;
 	float cred = 0.0f;
+	string title = "ADD CREDIT";
+
+		TransactionTitle(title);
 
 	cout << "\nHow much Credit do you want to add to your account: ";
 	getline(cin, credit);

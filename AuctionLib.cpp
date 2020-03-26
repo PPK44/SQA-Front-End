@@ -111,3 +111,9 @@ bool exitCmd(string buffer){
         return false;
     }
 }
+
+void TransactionTitle(string transaction) {
+    Highlight();
+    std::cout << Spaces(24) << transaction;
+    Highlight();
+}

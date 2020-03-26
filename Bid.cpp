@@ -41,12 +41,11 @@ void Bid::BidOnItem(string** items, int itemCount, Users user){
     string itemNameListCut;
     string** bidList;
     int bidListCount = 0;
+    string title = "BID";
     //Don't show any items that belong to user in the list?
     //Loop until user finishes bid 
     //While loop until user to inputs valid item name
-    Highlight();
-    std::cout << Spaces(24) << "BID";
-    Highlight();
+    TransactionTitle(title);
     std::cout << "Type \"exit\" to return to main menu";
     LightHighlight();
 while(done == false){    
