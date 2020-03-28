@@ -12,6 +12,7 @@
 #include "AuctionLib.h"
 #include "Writer.h"
 #include <cmath>
+#include <algorithm>
 Bid::Bid(){
 
 }
@@ -87,8 +88,12 @@ while(done == false){
         //Gets the total number of matching items, which will be used for the array
         for (int i = 0; i < itemCount; i++){
             itemNameListCut = items[i][1].substr(0,itemLength);
-            if(itemName.compare(itemNameListCut) == 0){
-                bidListCount++;
+            if(ToLower(itemName).compare(ToLower(itemNameListCut)) == 0){
+                string sellerName = items[i][2];
+                sellerName.erase(remove(sellerName.begin(), sellerName.end(), ' '), sellerName.end());
+                if(user.getUserName().compare(sellerName) != 0 ){
+                    bidListCount++;
+                }
             }
         }
 
@@ -119,18 +124,24 @@ while(done == false){
 
             //Get Item name, seller's name, remaining days and current bid when it matches
             //TODO: Check if seller's name is same as current user and don't add it in bidList
-            if(itemName.compare(itemNameListCut) == 0){ //We need i on the items array but we want to increment 
-                bidList[j][0] = items[i][1]; //Item Name
-                bidList[j][1] = items[i][2]; //Seller's name
-                bidList[j][2] = items[i][4]; //Remaining days
-                bidList[j][3] = items[i][5]; //Current Bid
-                j++;
+            if(ToLower(itemName).compare(ToLower(itemNameListCut)) == 0){ //We need i on the items array but we want to increment 
+                
+                    bidList[j][0] = items[i][1]; //Item Name
+                    bidList[j][1] = items[i][2]; //Seller's name
+                    bidList[j][2] = items[i][4]; //Remaining days
+                    bidList[j][3] = items[i][5]; //Current Bid
+                    j++;
+                
             }
         }
         //Do another for loop and print out each item with a cooresponding number for user to input, the name and the current bid per line
         // Calculates the number of elements inside an array
         for (int i = 0; i < bidListCount; i++){
-            std::cout << "\n" << i << ". " << bidList[i][0] << " " << bidList[i][1] << " " << bidList[i][2] << " " << bidList[i][3];
+            float bid = stof(bidList[i][3]);
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(2) << fixed << bid;
+            string daBid = stream.str();
+            std::cout << "\n" << i << ". " << bidList[i][0] << " " << bidList[i][1] << " " << bidList[i][2] << " " << daBid;
         }
         // Prompt user to select a number from a list and to exit type -1
         // Check if the item belongs to a user as they cannot bid on their own items and boot them back to item list
@@ -251,7 +262,7 @@ while(done == false){
     }
 }
    
-    cout << "Exit command executed. Moving you back to main menu";
+    cout << "Exit command executed. Moving you back to main menu" << endl;
     loop_end:;
 }
 
@@ -262,3 +273,4 @@ bool Bid::exitCmd(string buffer){
         return false;
     }
 }
+

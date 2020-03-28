@@ -25,7 +25,7 @@ void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, 
     std::stringstream stream;
     stream << std::fixed << std::setprecision(2) << fixed << bid;
     string currentBid = stream.str();
-    currentBid.insert(currentBid.begin(), 7 - currentBid.length(), '0');
+    currentBid.insert(currentBid.begin(), 6 - currentBid.length(), '0');
     string name = buyerName;
     name.append(15 - buyerName.length(), ' ');
     outFile.open(DAILY_TRANSACTION_FILE, ios::app);
@@ -140,15 +140,17 @@ void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int n
 
 
 void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerName, float refundAmount){
-    string buffer;
-
-    
+    string refund;
     std::stringstream stream;
     stream << std::fixed << std::setprecision(2) << fixed << refundAmount;
-    
-    buffer = stream.str();
+    refund = stream.str();
+    refund.insert(refund.begin(), 6 - refund.length(), '0');
+    string buyer = buyerName;
+    buyer.append(15 - buyerName.length(), ' ');
+    string seller = sellerName;
+    seller.append(15 - sellerName.length(), ' ');
     outFile.open(DAILY_TRANSACTION_FILE, ios::app);
-    outFile << "\n05 " + buyerName + " " +  sellerName + " " + buffer; 
+    outFile << "\n05 " + buyer + " " +  seller + " " + refund; 
 
     outFile.close();
 }
