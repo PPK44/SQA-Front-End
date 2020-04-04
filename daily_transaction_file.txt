@@ -2,3 +2,6 @@
 06 test123         FS 000899.00
 00 test123         FS 222591.22
 03 nintendo switch     test123         019 069.00
+03 nintendo switch     test123         045 089.00
+00 test123         FS 222591.22
+00 test123         FS 222591.22

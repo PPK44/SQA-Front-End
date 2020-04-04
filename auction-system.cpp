@@ -389,11 +389,11 @@ void readInitialFiles(string curr, string avail){
 			items[j][0] = temp.substr(0, 4); // Item ID
 			items[j][1] = temp.substr(5, 19); // Item Name
 			items[j][2] = temp.substr(25, 15); // Seller name
-			items[j][3] = temp.substr(40, 15);  // Current Bidder's name
-			items[j][4] = temp.substr(55, 4); // Remaining days
-			items[j][5] = temp.substr(59, 7); // Current bid
+			items[j][3] = temp.substr(41, 15);  // Current Bidder's name
+			items[j][4] = temp.substr(57, 3); // Remaining days
+			items[j][5] = temp.substr(61, 6); // Current bid
 		
-		//cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + items[j][5] + "\n";
+		cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + " " + items[j][5] + "\n";
 			j++;
 	}
 	

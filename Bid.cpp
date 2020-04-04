@@ -32,7 +32,6 @@ void Bid::BidOnItem(string** items, int itemCount, Users user, string transactio
     bool initialBidConfirmation = false;
     bool bidCheck = false;
     bool alphanumericCheck = false;
-    bool bidAlphanumericCheck = false;
     bool done = false;
     int itemSelect = 0;
     int itemLength = 0;
@@ -121,6 +120,7 @@ while(done == false){
         //Now we can put the item name, seller's name, remaining days and current bid inside with this defined array
         for (int i = 0; i < itemCount; i++){
             itemNameListCut = items[i][1].substr(0,itemLength);
+            cout << itemName << " " << itemNameListCut << endl;
 
             //Get Item name, seller's name, remaining days and current bid when it matches
             //TODO: Check if seller's name is same as current user and don't add it in bidList
@@ -204,6 +204,7 @@ while(done == false){
                     LightHighlight();
                     cout << "Kicking you back to main";
                     Highlight();
+                    done = true;
                     break;
                 }
                 else{
@@ -214,9 +215,11 @@ while(done == false){
             }
             if (done == false){
                 
-                std::cout << "\nHow much would you like to bid (Min Bid: " << minimumPrice << "): ";
+                
                 while (bidCheck == false){
                     buffer = "";
+                    std::cout << "\nHow much would you like to bid (Min Bid: " << minimumPrice << "): ";
+                    
                     getline(cin, buffer);
                     if (exitCmd(buffer) == true){
                         
@@ -224,38 +227,42 @@ while(done == false){
                         break;
                     }
                     
-                    while(bidAlphanumericCheck == false){
-                        
-                        if(IsDecimalNumber(buffer)){
-                            theBid = stof(buffer);
-                            bidAlphanumericCheck = true;
-                        } else{
+                    if(!buffer.empty()){
+                    if(IsDecimalNumber(buffer)){
+                        theBid = stof(buffer);
+                        if (theBid < minimumPrice){
                             LightHighlight();
-                            std::cout << "Input must be numeric";
+                            std::cout << "New bid must be 5% higher than current price";
                             Highlight();
+                            bidCheck = false;
+                        } else if(theBid > MAX_BID){
+                            LightHighlight();
+                            std::cout << "The maximum bid you can bid is $" << MAX_BID;
+                            Highlight();
+                            bidCheck = false;
+                        } else {
+                            Writer writer;
+                            //Item Name, Seller's name, buyer's name, new bid all in string
+                            LightHighlight();
+                            std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
+                            Highlight();
+                            writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), theBid, transactionFile);
+                            bidCheck = true;
+                            goto loop_end;
                         }
-                    }   
-                    if (theBid < minimumPrice){
+                    } else{
                         LightHighlight();
-                        std::cout << "New bid must be 5% higher than current price";
+                        std::cout << "Input must be numeric";
                         Highlight();
-                        bidAlphanumericCheck = false;
-                    } else if(theBid > MAX_BID){
-                        LightHighlight();
-                        std::cout << "The maximum bid you can bid is $" << MAX_BID;
-                        Highlight();
-                        bidAlphanumericCheck = false;
-                    } else {
-                        Writer writer;
-                        //Item Name, Seller's name, buyer's name, new bid all in string
-                        LightHighlight();
-                        std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
-                        Highlight();
-                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), theBid, transactionFile);
-                        bidCheck = true;
-                        goto loop_end;
+                        bidCheck = false;
                     }
-                    
+                    }else{
+                        LightHighlight();
+                        std::cout << "You must enter a value.";
+                        Highlight();
+                        bidCheck = false;
+                    }
+                         
                 }
             }
         }
