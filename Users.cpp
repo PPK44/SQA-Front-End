@@ -159,6 +159,8 @@ void Users::AddCredits(Users user, string transactionFile){
 	string credit;
 	float sum;
 	float holder = user.getCreditCount();
+	cout << holder << endl;
+	cout << user.getCredits() << endl;
 	Writer writer;
 	const string code = "06";
 	float minCredit = 0.0f;
@@ -184,10 +186,11 @@ void Users::AddCredits(Users user, string transactionFile){
 		Highlight();
 	}else if(sum > SESSION_CREDIT_LIMIT){
 		LightHighlight();
-		cout << "Error! You have exceeded your credit limit";
+		cout << "Error! You have exceeded your session credit limit";
 		Highlight();
 	}else{
 		user.setCreditCount(sum);
+		setCreditCount(sum);
 		LightHighlight();
 		cout << "You have added: " << sum ;
 		Highlight();

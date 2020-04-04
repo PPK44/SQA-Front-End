@@ -216,6 +216,10 @@ string Menu(Users user){
 				Highlight();
 				cout << "Access Denied: You are a Buy-Standard user";
 				Highlight();
+			}else if(ToLower(choice).compare("addcredit") == 0) {
+				
+				user.AddCredits(user, transactionFile);
+
 			}else if(ToLower(choice).compare("delete") == 0) {
 
                 Highlight();
@@ -245,6 +249,10 @@ string Menu(Users user){
                 Highlight();
 				cout << "Access Denied: You are a Sell-Standard user";
 				Highlight();
+
+			}else if(ToLower(choice).compare("addcredit") == 0) {
+				
+				user.AddCredits(user, transactionFile);
 
 			}else if(ToLower(choice).compare("update") == 0) {
                 
@@ -393,7 +401,7 @@ void readInitialFiles(string curr, string avail){
 			items[j][4] = temp.substr(57, 3); // Remaining days
 			items[j][5] = temp.substr(61, 6); // Current bid
 		
-		cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + " " + items[j][5] + "\n";
+		//cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + " " + items[j][5] + "\n";
 			j++;
 	}
 	
