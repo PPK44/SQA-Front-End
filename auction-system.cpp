@@ -34,7 +34,7 @@ void ClearScreen();
 
 string currentAccounts = "";
 string availableItems = "";
-string trans = "";
+string transactionFile = "";
 string** accounts;
 string** items;
 int userCount; 
@@ -52,7 +52,8 @@ int main(int argc, char *argv[]) {
 	}else{
 		currentAccounts = argv[1];
 		availableItems = argv[2];
-		trans = argv[3];
+		transactionFile = argv[3];
+		cout << transactionFile;
 	}
 
 try
@@ -98,8 +99,7 @@ void Home(Users user){
 		getline(cin, choice);
 	
 	    if(ToLower(choice).compare(LOGIN) == 0){
-			//ClearScreen();
-			//Title();
+		
      		login = user.Login(accounts, userCount);
 			 if(login == true) {
 				 if(user.getUserType().compare("--") == 0){
@@ -110,16 +110,16 @@ void Home(Users user){
 					returnString = Menu(user);
 				 }
 				 
-				 //ClearScreen();
+				
 			 }else {
-				 //ClearScreen();
+		
 				 
 				 error = "\nYour Username or Password were entered incorrectly. Please Try again!\n";
 			 }
 			
      	}else if(ToLower(choice).compare(CREATE) == 0){
 
-			user.Create(accounts, userCount);
+			user.Create(accounts, userCount, transactionFile);
 			//readInitialFiles(currentAccounts, availableItems);
 
      	}else if(ToLower(choice).compare(EXIT) == 0){
@@ -171,14 +171,14 @@ string Menu(Users user){
 			getline(cin, choice);
 			if(ToLower(choice).compare(ADVERTISE) == 0) {
                 
-                ad.AdvertiseItem(user);
+                ad.AdvertiseItem(user, transactionFile);
             }else if(ToLower(choice).compare("addcredit") == 0) {
 				
-				user.AddCredits(user);
+				user.AddCredits(user, transactionFile);
 
 			}else if(ToLower(choice).compare("bid") == 0){
 				
-				newbid.BidOnItem(items, itemCount, user);
+				newbid.BidOnItem(items, itemCount, user, transactionFile);
 			}else if (ToLower(choice).compare("checkitems") == 0){
 				
 				newItem.CheckItems(items, itemCount, user);
@@ -208,6 +208,7 @@ string Menu(Users user){
 			cout << "\nEnter Command: ";
 			getline(cin, choice);
 			if(ToLower(choice).compare("bid") == 0){
+				newbid.BidOnItem(items, itemCount, user, transactionFile);
 				
 			}else if(ToLower(choice).compare(CHANGE_PASSWORD) == 0){
 				user.ChangePassword(user, currentAccounts);
@@ -235,6 +236,7 @@ string Menu(Users user){
 			cout << "\nEnter Command: ";
 			getline(cin, choice);
             if(ToLower(choice).compare("advertise") == 0) {
+				ad.AdvertiseItem(user, transactionFile);
 
 			}else if(ToLower(choice).compare(CHANGE_PASSWORD) == 0){
 				user.ChangePassword(user, currentAccounts);
@@ -268,26 +270,23 @@ string Menu(Users user){
 				
 			}else if(ToLower(choice).compare("delete") == 0) {
 
-                admin.DeleteUser(accounts, userCount);
+                admin.DeleteUser(accounts, userCount, transactionFile);
 
 			}else if(ToLower(choice).compare("refund") == 0) {
 
-				admin.Refund(accounts, userCount);
+				admin.Refund(accounts, userCount, transactionFile);
 				
-			}else if(ToLower(choice).compare("update") == 0) {
-                
-                admin.Update(accounts, userCount);
 			}else if(ToLower(choice).compare(CHANGE_PASSWORD) == 0){
 				admin.ChangePassword(user, currentAccounts);
 			}else if(ToLower(choice).compare(UPDATE) == 0){
-				admin.Update(accounts, userCount);
+				admin.Update(accounts, userCount, transactionFile);
 			} 
 
 		}
 
 		if(ToLower(choice).compare(LOGOUT) == 0){
 			
-			user.EndSession(user);
+			user.EndSession(user, transactionFile);
 			ifLogout = false;
 			
 		}

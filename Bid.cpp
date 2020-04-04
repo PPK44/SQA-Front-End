@@ -23,7 +23,7 @@ float Bid::CalculateLowestBid(float currentPrice){
     return (rounding);
 }
 
-void Bid::BidOnItem(string** items, int itemCount, Users user){
+void Bid::BidOnItem(string** items, int itemCount, Users user, string transactionFile){
     string itemName = "";
     string buffer = "";
     bool itemCheck = false;
@@ -251,7 +251,7 @@ while(done == false){
                         LightHighlight();
                         std::cout << Spaces(12) << "A bid of $" << theBid << " has been placed!";
                         Highlight();
-                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), theBid);
+                        writer.BidWriteToDailyTransactionFile(bidList[itemSelect][0], bidList[itemSelect][1], user.getUserName(), theBid, transactionFile);
                         bidCheck = true;
                         goto loop_end;
                     }

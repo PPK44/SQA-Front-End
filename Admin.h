@@ -39,23 +39,23 @@ class Admin : public Users{
         /**
          * Method to delete a chosen user
          */ 
-        void DeleteUser(std::string**, int);
+        void DeleteUser(std::string**, int, string);
         /**
          * Method to choose which update to do
          */ 
-        void Update(string**, int);
+        void Update(string**, int, string);
         /**
          * Method enable a disabled user account
          */ 
-        void EnableUser(string**, int);
+        void EnableUser(string**, int, string);
         /**
          * Method to disable a current user   
          */
-        void DisableUser(string**, int);
+        void DisableUser(string**, int, string);
         /**
          * Method to refund a user from a transaction
          */ 
-        void Refund(string**, int);
+        void Refund(string**, int, string);
         /**
          * Overloaded function to add credits to a users account
          */ 

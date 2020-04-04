@@ -54,7 +54,7 @@ class Bid : public Items{
          * User is Prompted to input an item name then selects from a list of items then input
          * an amount to bid on an item
          */ 
-        void BidOnItem(string** item, int itemCount, Users user);
+        void BidOnItem(string** item, int itemCount, Users user, string);
 
         bool exitCmd(std::string buffer);
 

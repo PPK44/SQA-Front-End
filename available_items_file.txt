@@ -1,5 +1,2 @@
-1    DRAGON SCIMITAR     MR.RUNESCAPEMAN PAULKERRIGAN44 100 010.99
-2    DRAGON SPEAR        SOMEDUDE        NOTPAUL44      069 014.20
-3    RUNITE ORE          MR.RUNESCAPEMAN PAULKERRIGAN44 032 015.99
-4    BRONZE DAGGER       test123         CALVIN         042 005.99
-5    lindapussyisvvvgood test123         CALVIN         025 006.99
+1    test item           AnotherUser     PAULKERRIGAN44  088 000.00
+2    apple               sellingboy                      080 000.00

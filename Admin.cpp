@@ -16,7 +16,7 @@
 Admin::Admin(){
     
 }
-void EnableDuplicate(string, Users);
+void EnableDuplicate(string, Users, string);
 inline void UserNotFound(std::string user) {
     LightHighlight();
     std::cout << Spaces(12)
@@ -28,7 +28,7 @@ void Admin::AddCredits(){
 
 };
 
-void Admin::DeleteUser(std::string** users, int numUsers){
+void Admin::DeleteUser(std::string** users, int numUsers, string transactionFile){
     string username, buffer = "";
     bool userFound, confirm = false;
     Writer writer;
@@ -71,7 +71,7 @@ void Admin::DeleteUser(std::string** users, int numUsers){
                 user.setUserName(username);
                 user.setUserType(userType);
                 user.setCredits(stof(credits));
-                writer.GenericWriteToDailyTransactionFile(user, code);
+                writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
                 confirm = true;
             } else if(ToLower(buffer).compare(NO) == 0) {
                 LightHighlight();
@@ -92,15 +92,15 @@ void Admin::DeleteUser(std::string** users, int numUsers){
     }
 }
 
-void Admin::Update(string** users, int numUsers){
+void Admin::Update(string** users, int numUsers, string transactionFile){
     string buffer = "";
     string title = "UPDATE";
 
 		TransactionTitle(title);
     std::cout << "Would you like to enable or disable a user?: ";
     getline(cin, buffer);
-    if(ToLower(buffer).compare(DISABLE) == 0) DisableUser(users, numUsers);
-    else if(ToLower(buffer).compare(ENABLE) == 0) EnableUser(users, numUsers);
+    if(ToLower(buffer).compare(DISABLE) == 0) DisableUser(users, numUsers, transactionFile);
+    else if(ToLower(buffer).compare(ENABLE) == 0) EnableUser(users, numUsers, transactionFile);
     else {
         LightHighlight();
         std::cout << Spaces(18) << "Invalid option";
@@ -108,7 +108,7 @@ void Admin::Update(string** users, int numUsers){
     }
 }
 
-void Admin::EnableUser(string** users, int numUsers){
+void Admin::EnableUser(string** users, int numUsers, string transactionFile){
     
     string buffer = "";
     string userType = "";
@@ -144,13 +144,13 @@ void Admin::EnableUser(string** users, int numUsers){
                 cout << userType << endl;
                 if(ToLower(userType).compare(ToLower(FULL_STANDARD)) == 0){
                     user.setUserType(FULL_STANDARD);
-                    EnableDuplicate(buffer, user);
+                    EnableDuplicate(buffer, user, transactionFile);
                 }else if(ToLower(userType).compare(ToLower(BUY_STANDARD)) == 0){
                     user.setUserType(BUY_STANDARD);
-                    EnableDuplicate(buffer, user);
+                    EnableDuplicate(buffer, user, transactionFile);
                 }else if(ToLower(userType).compare(ToLower(SELL_STANDARD)) == 0){
                     user.setUserType(SELL_STANDARD);
-                    EnableDuplicate(buffer, user);
+                    EnableDuplicate(buffer, user, transactionFile);
                 }else{
                     cout << "Invalid Option, Please try enabling this user again!" << endl;
                 } 
@@ -161,7 +161,7 @@ void Admin::EnableUser(string** users, int numUsers){
     }
 }
 
-void Admin::DisableUser(string** users, int numUsers){
+void Admin::DisableUser(string** users, int numUsers, string transactionFile){
     const string code = "08";
     string buffer = "";
     Users user;
@@ -200,7 +200,7 @@ void Admin::DisableUser(string** users, int numUsers){
                     Highlight();
                     confirm = true;
                     // Disable the man
-                    writer.GenericWriteToDailyTransactionFile(user, code);
+                    writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
                 } else if(ToLower(buffer).compare(NO) == 0) {
                     LightHighlight();
                     std::cout << user.getUserName() << "'s account was not disabled!";
@@ -216,7 +216,7 @@ void Admin::DisableUser(string** users, int numUsers){
     }
 }  
 
-void Admin::Refund(string** users, int numUsers) {
+void Admin::Refund(string** users, int numUsers, string transactionFile) {
     const string code = "05";
     string sellerUsername, buyerUsername, buffer = "";
     bool userFound, validRefund = false;
@@ -277,7 +277,7 @@ void Admin::Refund(string** users, int numUsers) {
                                 std::cout << "You cannot refund more than 999.99";
                             } else {
                                 std::cout << "\nMoney has been refunded, moving you back to Main Menu!";
-                                writer.RefundWriteToDailyTransactionFile(buyerUsername, sellerUsername, credits);
+                                writer.RefundWriteToDailyTransactionFile(buyerUsername, sellerUsername, credits, transactionFile);
                                 //break;
                             }
                         } else {
@@ -290,7 +290,7 @@ void Admin::Refund(string** users, int numUsers) {
     }
 }
 
-void EnableDuplicate(string buffer, Users user){
+void EnableDuplicate(string buffer, Users user, string transactionFile){
     Writer writer;
     const string code = "07";
     cout << endl
@@ -303,7 +303,7 @@ void EnableDuplicate(string buffer, Users user){
         std::cout << user.getUserName() << "'s account has been enabled with " + user.getUserType() + " access!";
         Highlight();
         // Enable the man
-        writer.GenericWriteToDailyTransactionFile(user, code);
+        writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
     } else if(ToLower(buffer).compare(NO) == 0) {
         LightHighlight();
         std::cout << user.getUserName() << "'s account was not enabled!";

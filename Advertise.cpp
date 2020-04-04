@@ -14,7 +14,7 @@
 
 Advertise::Advertise(){}
 
-void Advertise::AdvertiseItem(Users self){
+void Advertise::AdvertiseItem(Users self, string transactionFile){
     Writer writer;
     const short MAX_AUC_DAYS = 100;
     const short MIN_AUC_DAYS = 1;
@@ -40,7 +40,7 @@ void Advertise::AdvertiseItem(Users self){
             Highlight();
             
         }else {
-            itemName = buffer;
+            itemName = ToLower(buffer);
             buffer = "";
             std::cout << "\nMinimum bid: $";
             getline(cin, buffer);
@@ -86,7 +86,7 @@ void Advertise::AdvertiseItem(Users self){
                                       << "with a minimum bid of $"<< setprecision(2) << fixed << minBid << "!";
                             Highlight();
                             validAd = true;
-                            writer.WriteAdvertiseToDailyTransactionFile(self, itemName, numDays, minBid);
+                            writer.WriteAdvertiseToDailyTransactionFile(self, itemName, numDays, minBid, transactionFile);
                         }
                     } else {
                         LightHighlight();

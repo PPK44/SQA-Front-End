@@ -58,7 +58,7 @@ class Advertise : public Items {
          * User is prompted to input most information of the item they wish to advertise for
          * (item name, minimum bid price and number of days to put the item up for)
          */         
-        void AdvertiseItem(Users self);
+        void AdvertiseItem(Users self, string);
 
 
 

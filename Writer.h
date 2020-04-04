@@ -40,6 +40,7 @@ class Writer{
          *Default Constructor for Writer Class
          */  
         Writer();
+       
         /**
          * Constant to hold the daily transaction file name  
          */
@@ -57,7 +58,7 @@ class Writer{
         /**
          * Writer Class method to write to the daily transaction file    
          */
-        void BidWriteToDailyTransactionFile(string, string, string, float);
+        void BidWriteToDailyTransactionFile(string, string, string, float, string);
         /**
          * Writer class method to write to the user accounts file   
          */
@@ -65,15 +66,15 @@ class Writer{
         /**
          * Writer class method to write to the user accounts file   
          */
-        void GenericWriteToDailyTransactionFile(Users, string);
+        void GenericWriteToDailyTransactionFile(Users, string, string);
         /**
          * Writer class method to write to the user accounts file   
          */
-        void WriteAdvertiseToDailyTransactionFile(Users, string, int, float);
+        void WriteAdvertiseToDailyTransactionFile(Users, string, int, float, string);
         /**
          * Writer class method to write to Transaction file
          */
-        void RefundWriteToDailyTransactionFile(string, string, float);
+        void RefundWriteToDailyTransactionFile(string, string, float, string);
 
 
 };

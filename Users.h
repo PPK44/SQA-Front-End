@@ -124,15 +124,15 @@ class Users{
 		/**
 		 * Users Class Method for creating an account
 		 */ 
-		void Create(string**, int);
+		void Create(string**, int, string);
 		/**
 		 * Users Class Method to add credits to a user account
 		 */ 
-		virtual void AddCredits(Users);
+		virtual void AddCredits(Users, string);
 		/**
 		 * Users Class Method to end session
 		 */ 
-		void EndSession(Users);
+		void EndSession(Users, string);
 
 };
 

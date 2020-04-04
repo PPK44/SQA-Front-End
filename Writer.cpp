@@ -19,7 +19,7 @@ Writer::Writer(){
 }
 
 
-void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, string buyerName, float bid){
+void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, string buyerName, float bid, string transactionFile){
 
     string buffer;
     std::stringstream stream;
@@ -28,8 +28,8 @@ void Writer::BidWriteToDailyTransactionFile(string itemName, string sellerName, 
     currentBid.insert(currentBid.begin(), 6 - currentBid.length(), '0');
     string name = buyerName;
     name.append(15 - buyerName.length(), ' ');
-    outFile.open(DAILY_TRANSACTION_FILE, ios::app);
-    outFile << "\n04 " + itemName + " " + sellerName + " " + name + " " + currentBid; 
+    outFile.open(transactionFile, ios::app);
+    outFile << "04 " << itemName << " " << sellerName << " " << name << " " << currentBid << endl; 
 
     outFile.close();
 
@@ -82,7 +82,7 @@ void Writer::WriteToChangePassword(Users user, string file){
 
 }
 
-void Writer::GenericWriteToDailyTransactionFile(Users user, string transactionCode){
+void Writer::GenericWriteToDailyTransactionFile(Users user, string transactionCode, string transactionFile){
     fstream File;
     std::stringstream stream;
     if(transactionCode == "06"){
@@ -101,22 +101,22 @@ void Writer::GenericWriteToDailyTransactionFile(Users user, string transactionCo
     cred.insert(cred.begin(), MAX_CREDIT_LENGTH - credHolder.length(), '0');
     
 
-	File.open(DAILY_TRANSACTION_FILE, ios::app); //opening the file
+	File.open(transactionFile, ios::app); //opening the file
 	if (!File) {
         cerr << "Unable to open file";
     }
 
-    File << "\n" << code << " " << username << " " << userType << " " << cred;
+    File << code << " " << username << " " << userType << " " << cred << endl;
     File.close(); //closing the file
 }
 
-void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int numDays, float bid) {
+void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int numDays, float bid, string transactionFile) {
     fstream file;
     const string ADVERTISE_CODE = "03";
     std::stringstream bidStream;
     string username, itemName, aucBid = "";
 
-    file.open(DAILY_TRANSACTION_FILE, ios::app); //opening the file
+    file.open(transactionFile, ios::app); //opening the file
 	if (!file) {
         cerr << "Unable to open file";
     }
@@ -127,19 +127,18 @@ void Writer::WriteAdvertiseToDailyTransactionFile(Users user, string item, int n
     aucBid   = bidStream.str();
     username.append(MAX_USER_NAME_LENGTH - user.getUserName().length(), ' ');
     itemName.append(MAX_ITEM_NAME_LENGTH - itemName.length(), ' ');
-    aucBid.insert(aucBid.begin(), MAX_CREDIT_LENGTH - aucBid.length(), '0');
+    aucBid.insert(aucBid.begin(), 6 - aucBid.length(), '0');
 
-    file << endl 
-         << ADVERTISE_CODE << " " 
+    file << ADVERTISE_CODE << " " 
          << itemName << " " 
          << username << " " 
          << setfill('0') << setw(3) << numDays << " "
-         << setprecision(2) << fixed << aucBid;
+         << setprecision(2) << fixed << aucBid << endl;
     file.close();
 }
 
 
-void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerName, float refundAmount){
+void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerName, float refundAmount, string transactionFile){
     string refund;
     std::stringstream stream;
     stream << std::fixed << std::setprecision(2) << fixed << refundAmount;
@@ -149,8 +148,8 @@ void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerNa
     buyer.append(15 - buyerName.length(), ' ');
     string seller = sellerName;
     seller.append(15 - sellerName.length(), ' ');
-    outFile.open(DAILY_TRANSACTION_FILE, ios::app);
-    outFile << "\n05 " + buyer + " " +  seller + " " + refund; 
+    outFile.open(transactionFile, ios::app);
+    outFile << "05 " + buyer + " " +  seller + " " + refund << endl; 
 
     outFile.close();
 }
