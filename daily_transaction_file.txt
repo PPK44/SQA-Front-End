@@ -5,3 +5,4 @@
 03 nintendo switch     test123         045 089.00
 00 test123         FS 222591.22
 00 test123         FS 222591.22
+01 hi              hello        SS 000000.00

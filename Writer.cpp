@@ -93,14 +93,11 @@ void Writer::GenericWriteToDailyTransactionFile(Users user, string transactionCo
     string credHolder = stream.str();
     string code = transactionCode;
     string username = user.getUserName();
-    string password = user.getPassword();
     string userType = user.getUserType();
 	string cred = credHolder;
     username.append(MAX_USER_NAME_LENGTH - user.getUserName().length(), ' ');
-    password.append(MAX_PASSWORD_LENGTH - user.getPassword().length(), ' ');
     cred.insert(cred.begin(), MAX_CREDIT_LENGTH - credHolder.length(), '0');
     
-
 	File.open(transactionFile, ios::app); //opening the file
 	if (!File) {
         cerr << "Unable to open file";
@@ -152,4 +149,32 @@ void Writer::RefundWriteToDailyTransactionFile(string buyerName, string sellerNa
     outFile << "05 " + buyer + " " +  seller + " " + refund << endl; 
 
     outFile.close();
+}
+
+void Writer::CreateWriteToDailyTransactionFile(Users user, string transactionCode, string transactionFile){
+    fstream File;
+    std::stringstream stream;
+    if(transactionCode == "06"){
+        stream << std::fixed << std::setprecision(2) << fixed << user.getCreditCount();
+    }else{
+        stream << std::fixed << std::setprecision(2) << fixed << user.getCredits();
+    }
+    string credHolder = stream.str();
+    string code = transactionCode;
+    string username = user.getUserName();
+    string password = user.getPassword();
+    string userType = user.getUserType();
+	string cred = credHolder;
+    username.append(MAX_USER_NAME_LENGTH - user.getUserName().length(), ' ');
+    password.append(MAX_PASSWORD_LENGTH - user.getPassword().length(), ' ');
+    cred.insert(cred.begin(), MAX_CREDIT_LENGTH - credHolder.length(), '0');
+    
+
+	File.open(transactionFile, ios::app); //opening the file
+	if (!File) {
+        cerr << "Unable to open file";
+    }
+
+    File << code << " " << username << " " << password << " " << userType << " " << cred << endl;
+    File.close(); //closing the file
 }

@@ -70,6 +70,10 @@ class Writer{
         /**
          * Writer class method to write to the user accounts file   
          */
+        void CreateWriteToDailyTransactionFile(Users, string, string);
+        /**
+         * Writer class method to write to the user accounts file   
+         */
         void WriteAdvertiseToDailyTransactionFile(Users, string, int, float, string);
         /**
          * Writer class method to write to Transaction file

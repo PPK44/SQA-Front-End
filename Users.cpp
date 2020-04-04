@@ -147,7 +147,7 @@ void Users::Create(string** users, int userCount, string transactionFile){
 		user.setPassword(password);
 		user.setUserType(userType);
 		user.setCredits(0.0);
-		writer.GenericWriteToDailyTransactionFile(user, code, transactionFile);
+		writer.CreateWriteToDailyTransactionFile(user, code, transactionFile);
 		//validation = true;
 	}
 }
