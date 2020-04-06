@@ -84,15 +84,13 @@ while(done == false){
 
         //Compare input to the item file in a loop and add it into an array if matches
         itemLength = itemName.length();
+        itemName.erase(remove(itemName.begin(), itemName.end(), ' '), itemName.end());
         //Gets the total number of matching items, which will be used for the array
         for (int i = 0; i < itemCount; i++){
-            itemNameListCut = items[i][1].substr(0,itemLength);
+            itemNameListCut = items[i][1];//.substr(0,itemLength);
+            itemNameListCut.erase(remove(itemNameListCut.begin(), itemNameListCut.end(), ' '), itemNameListCut.end());
             if(ToLower(itemName).compare(ToLower(itemNameListCut)) == 0){
-                string sellerName = items[i][2];
-                sellerName.erase(remove(sellerName.begin(), sellerName.end(), ' '), sellerName.end());
-                if(user.getUserName().compare(sellerName) != 0 ){
-                    bidListCount++;
-                }
+                bidListCount++;
             }
         }
 
@@ -119,19 +117,26 @@ while(done == false){
         }
         //Now we can put the item name, seller's name, remaining days and current bid inside with this defined array
         for (int i = 0; i < itemCount; i++){
-            itemNameListCut = items[i][1].substr(0,itemLength);
-            cout << itemName << " " << itemNameListCut << endl;
-
+            itemNameListCut = items[i][1];//.substr(0,itemLength);
+            //cout << itemName << " " << itemNameListCut << endl;
+            itemNameListCut.erase(remove(itemNameListCut.begin(), itemNameListCut.end(), ' '), itemNameListCut.end());
             //Get Item name, seller's name, remaining days and current bid when it matches
             //TODO: Check if seller's name is same as current user and don't add it in bidList
             if(ToLower(itemName).compare(ToLower(itemNameListCut)) == 0){ //We need i on the items array but we want to increment 
-                
+                string sellerName = items[i][2];
+                sellerName.erase(remove(sellerName.begin(), sellerName.end(), ' '), sellerName.end());
+                if(user.getUserName().compare(sellerName) != 0 ){
                     bidList[j][0] = items[i][1]; //Item Name
                     bidList[j][1] = items[i][2]; //Seller's name
                     bidList[j][2] = items[i][4]; //Remaining days
                     bidList[j][3] = items[i][5]; //Current Bid
+                    
                     j++;
-                
+                }else{
+                    
+                    bidListCount--;
+                }
+                    
             }
         }
         //Do another for loop and print out each item with a cooresponding number for user to input, the name and the current bid per line

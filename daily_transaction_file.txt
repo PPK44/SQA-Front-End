@@ -6,3 +6,29 @@
 00 test123         FS 222591.22
 00 test123         FS 222591.22
 01 hi              hello        SS 000000.00
+01 hi              hello        SS 000000.00
+01 Paul            test         FS 000000.00
+06 MR.RUNESCAPEMAN FS 010000.00
+00 MR.RUNESCAPEMAN FS 000000.44
+03 DRAGON SCIMITAR     MR.RUNESCAPEMAN 100 080.99
+04 DRAGON SCIMITAR     MR.RUNESCAPEMAN HECKINGCOOLMAN  199.99
+00 HECKINGCOOLMAN  BS 001000.55
+04 RUNITE ORE          SOMEDUDE        test123         019.00
+04 DRAGON SPEAR        SOMEDUDE        test123         014.91
+03 DRAGON SCIMITAR     Paul            100 120.99
+00 HECKINGCOOLMAN  BS 001000.55
+01 thebest         hello        SS 000000.00
+00 test123         FS 222591.22
+06 thebest         SS 001000.00
+04 apple               test123         MR.RUNESCAPEMAN 005.00
+04 apple               test123         BUYINGMAN       009.00
+03 nintendoswitch      SELLINGBOY      100 199.99
+05 HECKINGCOOLMAN  MR.RUNESCAPEMAN 199.99
+07 yo              FS 000000.00
+08 test123         FS 222591.22
+04 DRAGON SCIMITAR     Paul            test123         199.99
+04 nintendoswitch      SELLINGBOY      BUYINGMAN       299.99
+03 DRAGON SCIMITAR     SELLINGBOY      100 080.99
+02 thebest         SS 001000.00
+00 test123         FS 222591.22
+00 test123         FS 222591.22

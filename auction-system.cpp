@@ -381,8 +381,11 @@ void readInitialFiles(string curr, string avail){
        // call system to stop
 }
 	while (!File.eof()){
+		dump = "";
 		getline(File, dump);
+		if (!dump.empty()){
 		itemCount++;
+		}
 	}
 
 	items = new string*[itemCount];
@@ -391,7 +394,7 @@ void readInitialFiles(string curr, string avail){
 	}
 	File.clear();
 	File.seekg(0, ios::beg);
-	while (!File.eof()) {
+	while (j !=itemCount) {
 
 		getline(File, temp);
 			items[j][0] = temp.substr(0, 4); // Item ID
@@ -401,7 +404,7 @@ void readInitialFiles(string curr, string avail){
 			items[j][4] = temp.substr(57, 3); // Remaining days
 			items[j][5] = temp.substr(61, 6); // Current bid
 		
-		//cout << items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + " " + items[j][5] + "\n";
+		//cout << "\n" + items[j][0] + items[j][1] + items[j][2] + items[j][3] + items[j][4] + " " + items[j][5];
 			j++;
 	}
 	
